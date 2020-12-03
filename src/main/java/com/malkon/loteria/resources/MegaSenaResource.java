@@ -23,6 +23,5 @@ public class MegaSenaResource {
 	public ResponseEntity<List<MegaSena>> gera(@PathVariable Integer qntJogos, @PathVariable Integer qntNumeros) {
 		List<MegaSena> jogos = service.gerarJogo(qntJogos, qntNumeros);
 		return ResponseEntity.ok().body(jogos);
-
 	}
 }
