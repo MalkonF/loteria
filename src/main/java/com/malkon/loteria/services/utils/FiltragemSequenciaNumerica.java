@@ -1,13 +1,11 @@
-package com.malkon.loteria.services;
+package com.malkon.loteria.services.utils;
 
 import java.util.Arrays;
 import java.util.SortedSet;
 
-import org.springframework.stereotype.Service;
+public class FiltragemSequenciaNumerica implements Operacao {
 
-@Service
-public class FiltragemService {
-
+	@Override
 	public boolean filtrar(SortedSet<Integer> numerosSorteados) {
 		Integer[] arrDosNumSorteados = (numerosSorteados.toArray(new Integer[numerosSorteados.size()]));
 		Arrays.sort(arrDosNumSorteados);

@@ -10,17 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.malkon.loteria.domain.MegaSena;
+import com.malkon.loteria.services.utils.UsandoFactory;
 
 @Service
 public class MegaSenaService {
 
 	@Autowired
-	FiltragemService filtragemService;
+	UsandoFactory filtragemFactory;
 
 	private List<Integer> dezenasSorteadas = new ArrayList<>();
 	private SortedSet<Integer> numerosSorteados = new TreeSet<>();
 
-	public ArrayList<MegaSena> gerarJogo(Integer qntJogos, Integer qntNumeros) {
+	public ArrayList<MegaSena> gerarJogo(Integer qntJogos, Integer qntNumeros, String[] tiposFiltragem) {
 		SecureRandom geraNumSorteados = new SecureRandom();
 		ArrayList<MegaSena> jogosSorteados = new ArrayList<>();
 		while (jogosSorteados.size() < qntJogos) {
@@ -33,7 +34,8 @@ public class MegaSenaService {
 			numerosSorteados.clear();
 			numerosSorteados.addAll(dezenasSorteadas);
 			dezenasSorteadas.clear();
-			if (!filtragemService.filtrar(numerosSorteados))
+			for(String tipos: tiposFiltragem)
+			if (!filtragemFactory.filtrandoUsandoFactory(numerosSorteados, tipos))
 				jogosSorteados.add(new MegaSena(numerosSorteados));
 		}
 		return jogosSorteados;

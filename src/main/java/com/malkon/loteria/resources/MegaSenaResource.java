@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.malkon.loteria.domain.MegaSena;
@@ -20,8 +21,8 @@ public class MegaSenaResource {
 	private MegaSenaService service;
 
 	@RequestMapping(value = "/{qntJogos}/{qntNumeros}", method = RequestMethod.GET)
-	public ResponseEntity<List<MegaSena>> gera(@PathVariable Integer qntJogos, @PathVariable Integer qntNumeros) {
-		List<MegaSena> jogos = service.gerarJogo(qntJogos, qntNumeros);
+	public ResponseEntity<List<MegaSena>> gera(@PathVariable Integer qntJogos, @PathVariable Integer qntNumeros, @RequestParam("tiposFiltragem") String[] tiposFiltragem) {
+		List<MegaSena> jogos = service.gerarJogo(qntJogos, qntNumeros, tiposFiltragem);
 		return ResponseEntity.ok().body(jogos);
 	}
 }
